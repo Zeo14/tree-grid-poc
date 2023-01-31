@@ -1,0 +1,44 @@
+<p>Tabulator</p>
+<div id="ex-table-div"></div>
+
+<h5>PrimeNg</h5>
+<p-treeTable
+  [value]="tree"
+  [columns]="cols"
+  selectionMode="checkbox"
+  [(selection)]="selectedNodes3"
+>
+  <ng-template pTemplate="caption">
+    <div class="flex">
+      <p-treeTableHeaderCheckbox></p-treeTableHeaderCheckbox>
+      <span class="ml-2">Toggle All</span>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="header" let-columns>
+    <tr>
+      <th *ngFor="let col of columns">
+        {{ col.header }}
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template
+    pTemplate="body"
+    let-rowNode
+    let-rowData="rowData"
+    let-columns="columns"
+  >
+    <tr>
+      <td *ngFor="let col of columns; let i = index">
+        <p-treeTableToggler
+          [rowNode]="rowNode"
+          *ngIf="i == 0"
+        ></p-treeTableToggler>
+        <p-treeTableCheckbox
+          [value]="rowNode"
+          *ngIf="i == 0"
+        ></p-treeTableCheckbox>
+        {{ rowData[col.field] }}
+      </td>
+    </tr>
+  </ng-template>
+</p-treeTable>
